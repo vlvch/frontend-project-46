@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
-import getData from './utils.js';
+import parseData from './parser.js';
 
 const genDiff = (firstPath, secondPath) => {
-  const firstFile = getData(firstPath);
-  const secondFile = getData(secondPath);
+  const firstFile = parseData(firstPath);
+  const secondFile = parseData(secondPath);
 
   const keys = _.sortBy(Object.keys({ ...firstFile, ...secondFile }));
 
