@@ -8,14 +8,17 @@ import genDiff from './index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const getFixturePath = (filename) => path.resolve(__dirname, '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), { encoding: 'utf8' });
+
 test('test json', () => {
-  const result = fs.readFileSync(path.resolve(__dirname, '__fixtures__/result1.txt'), { encoding: 'utf8' });
+  const result = readFile('result1.txt');
 
   return expect(genDiff('file1.json', 'file2.json')).toEqual(result);
 });
 
 test('test yaml', () => {
-  const result = fs.readFileSync(path.resolve(__dirname, '__fixtures__/result1.txt'), { encoding: 'utf8' });
+  const result = readFile('result1.txt');
 
   return expect(genDiff('file1.yaml', 'file2.yaml')).toEqual(result);
 });
