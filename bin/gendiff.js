@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import { Command } from 'commander';
-import genDiff from './index.js';
+import genDiff from '../src/index.js';
 
 const program = new Command();
 
@@ -10,8 +10,8 @@ program
   .argument('<filepath1>')
   .argument('<filepath2>')
   .option('-f, --format <type>', 'output format (default: "stylish")')
-  .action((filepath1, filepath2, format = 'stylish') => {
-    const result = genDiff(filepath1, filepath2, format);
+  .action((filepath1, filepath2, formatName) => {
+    const result = genDiff(filepath1, filepath2, formatName);
     console.log(result);
   });
 
