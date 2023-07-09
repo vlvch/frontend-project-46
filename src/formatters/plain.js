@@ -1,9 +1,10 @@
 import _ from 'lodash';
+
 const isComplex = (value) => {
-    if (_.isObject(value)) {
-      return '[complex value]'
-    }
-    return typeof value === 'string' ? `'${value}'` : value;
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
+  return typeof value === 'string' ? `'${value}'` : value;
 };
 
 const plain = (node, nodeName = '') => {
@@ -11,11 +12,13 @@ const plain = (node, nodeName = '') => {
     const {
       nodeKey, value, value2, type,
     } = key;
-    
-    let pathStart;
 
-    nodeName.length > 1 ? pathStart = `${nodeName}.` : pathStart = nodeName;
-  
+    let pathStart = nodeName;
+
+    if (nodeName.length > 1) {
+      pathStart = `${nodeName}.`;
+    }
+
     const path = `${pathStart}${nodeKey}`;
 
     if (type === 'objects') {
@@ -30,9 +33,8 @@ const plain = (node, nodeName = '') => {
     if (type !== 'equal') {
       return `Property '${path}' was updated. From ${isComplex(value)} to ${isComplex(value2)}`;
     }
-    return;
-  })
+    return '';
+  });
   return [...result.filter(Boolean)].join('\n');
 };
 export default plain;
-

@@ -34,5 +34,3 @@ test('test stylish', () => {
 
   return expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(result);
 });
-
-
