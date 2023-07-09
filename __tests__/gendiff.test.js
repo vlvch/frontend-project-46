@@ -22,3 +22,17 @@ test('test yaml', () => {
 
   return expect(genDiff('file1.yaml', 'file2.yaml')).toEqual(result);
 });
+
+test('test plain', () => {
+  const result = readFile('result2.txt');
+
+  return expect(genDiff('file1.json', 'file2.json', 'plain')).toEqual(result);
+});
+
+test('test stylish', () => {
+  const result = readFile('result1.txt');
+
+  return expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(result);
+});
+
+

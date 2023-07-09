@@ -10,9 +10,7 @@ const getData = (file) => {
 
   const absolutePath = path.resolve(__dirname, '..', '__fixtures__', file.toString());
 
-  const result = fs.readFileSync(absolutePath, 'utf-8');
-
-  return result;
+  return fs.readFileSync(absolutePath, 'utf-8');
 };
 
 const dataParse = (filepath) => {
