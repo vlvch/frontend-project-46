@@ -11,26 +11,38 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.resolve(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), { encoding: 'utf8' });
 
-test('test json', () => {
+test('test extension json', () => {
   const result = readFile('result1.txt');
 
   return expect(genDiff('file1.json', 'file2.json')).toEqual(result);
 });
 
-test('test yaml', () => {
+test('test extension yaml', () => {
   const result = readFile('result1.txt');
 
   return expect(genDiff('file1.yaml', 'file2.yaml')).toEqual(result);
 });
 
-test('test plain', () => {
+test('test extensions yaml and json', () => {
+  const result = readFile('result1.txt');
+
+  return expect(genDiff('file1.json', 'file2.yaml')).toEqual(result);
+});
+
+test('test format plain', () => {
   const result = readFile('result2.txt');
 
   return expect(genDiff('file1.json', 'file2.json', 'plain')).toEqual(result);
 });
 
-test('test stylish', () => {
+test('test format stylish', () => {
   const result = readFile('result1.txt');
 
   return expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(result);
+});
+
+test('test format json', () => {
+  const result = readFile('result3.txt');
+
+  return expect(genDiff('file1.json', 'file2.json', 'json')).toEqual(result);
 });
