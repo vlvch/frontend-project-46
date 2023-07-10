@@ -1,4 +1,5 @@
-/* eslint-disable no-restricted-syntax */
+#!/usr/bin/env node
+
 import { Command } from 'commander';
 import genDiff from '../index.js';
 
@@ -11,8 +12,7 @@ program
   .argument('<filepath2>')
   .option('-f, --format <type>', 'output format (default: "stylish")')
   .action((filepath1, filepath2, option) => {
-    const result = genDiff(filepath1, filepath2, option.format);
-    console.log(result);
+    console.log(genDiff(filepath1, filepath2, option.format));
   });
 
 program.parse();

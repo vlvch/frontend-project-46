@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
 
 const indent = (depth, n = 0) => ' '.repeat(4 * depth - n);
