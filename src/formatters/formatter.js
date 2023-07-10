@@ -10,6 +10,8 @@ const formatter = (file1, file2, formatName) => {
       return plain(tree);
     case 'stylish':
       return stylish(tree);
+    case 'json':
+      return JSON.stringify(tree);
     default:
       return stylish(tree);
   }
