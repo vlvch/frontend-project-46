@@ -7,7 +7,7 @@ const isComplex = (value) => {
   return typeof value === 'string' ? `'${value}'` : value;
 };
 
-const isStart = (nodeName) => nodeName.length > 1 ? `${nodeName}.` : nodeName;
+const isStart = (nodeName) => (nodeName.length > 1 ? `${nodeName}.` : nodeName);
 
 const plain = (node, nodeName = '') => {
   const result = node.map((key) => {
