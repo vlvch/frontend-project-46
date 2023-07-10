@@ -21,6 +21,8 @@ const dataParse = (filepath) => {
       return JSON.parse(getData(filepath));
     case '.yaml':
       return YAML.parse(getData(filepath));
+    case '.yml':
+      return YAML.parse(getData(filepath));
     default:
       return 'cant parse this extension';
   }
