@@ -17,6 +17,12 @@ test('test extension json', () => {
   return expect(genDiff('file1.json', 'file2.json')).toEqual(result);
 });
 
+test('test extension yml', () => {
+  const result = readFile('result1.txt');
+
+  return expect(genDiff('file1.yml', 'file2.yml')).toEqual(result);
+});
+
 test('test extension yaml', () => {
   const result = readFile('result1.txt');
 
