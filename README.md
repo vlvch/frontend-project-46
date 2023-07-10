@@ -19,5 +19,5 @@ Options:
   -f, --format <type>  output format (default: "stylish")
   -h, --help           display help for command
 ```
-## Example
-<script async id="asciicast-yi6BLocjrHGqrXVrXvANtJjiJ" src="https://asciinema.org/a/yi6BLocjrHGqrXVrXvANtJjiJ.js"></script>
+## Demo
+<a href="https://asciinema.org/a/yi6BLocjrHGqrXVrXvANtJjiJ" target="_blank"><img src="https://asciinema.org/a/yi6BLocjrHGqrXVrXvANtJjiJ.svg" /></a>
