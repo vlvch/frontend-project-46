@@ -1,30 +1,13 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import YAML from 'yaml';
 
-const getData = (file) => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-
-  const absolutePath = path.resolve(__dirname, '..', '__fixtures__', file.toString());
-
-  return fs.readFileSync(absolutePath, 'utf-8');
-};
-
-const dataParse = (filepath) => {
-  const extension = path.extname(filepath);
-
-  switch (extension) {
-    case '.json':
-      return JSON.parse(getData(filepath));
-    case '.yaml':
-      return YAML.parse(getData(filepath));
-    case '.yml':
-      return YAML.parse(getData(filepath));
+const dataParse = (data, type) => {
+  switch (type) {
+    case 'json':
+      return JSON.parse(data);
+    case 'yml': case 'yaml':
+      return YAML.parse(data);
     default:
-      return 'cant parse this extension';
+      return 'Can`t parse this extension';
   }
 };
 export default dataParse;

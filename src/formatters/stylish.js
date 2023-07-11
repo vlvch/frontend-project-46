@@ -2,9 +2,9 @@ import _ from 'lodash';
 
 const indent = (depth, n = 0) => ' '.repeat(4 * depth - n);
 
-const simpleTree = (node, depth) => {
-  if (_.isObject(node)) {
-    const result = Object.keys(node).map((key) => `${indent(depth)}${key}: ${simpleTree(node[key], depth + 1)}`);
+const stringify = (node, depth) => {
+  if (_.isPlainObject(node)) {
+    const result = Object.keys(node).map((key) => `${indent(depth)}${key}: ${stringify(node[key], depth + 1)}`);
     return ['{',
       ...result,
       `${indent(depth, 4)}}`].join('\n');
@@ -21,15 +21,15 @@ const stylish = (tree, depth = 1) => {
       return `${indent(depth)}${nodeKey}: ${stylish(value, depth + 1)}`;
     }
     if (type === 'equal') {
-      return `${indent(depth)}${nodeKey}: ${simpleTree(value, depth + 1)}`;
+      return `${indent(depth)}${nodeKey}: ${stringify(value, depth + 1)}`;
     }
-    if (type === 'file1') {
-      return `${indent(depth, 2)}- ${nodeKey}: ${simpleTree(value, depth + 1)}`;
+    if (type === 'removed') {
+      return `${indent(depth, 2)}- ${nodeKey}: ${stringify(value, depth + 1)}`;
     }
-    if (type === 'file2') {
-      return `${indent(depth, 2)}+ ${nodeKey}: ${simpleTree(value, depth + 1)}`;
+    if (type === 'added') {
+      return `${indent(depth, 2)}+ ${nodeKey}: ${stringify(value, depth + 1)}`;
     }
-    return `${indent(depth, 2)}- ${nodeKey}: ${simpleTree(value, depth + 1)}\n${indent(depth, 2)}+ ${nodeKey}: ${simpleTree(value2, depth + 1)}`;
+    return `${indent(depth, 2)}- ${nodeKey}: ${stringify(value, depth + 1)}\n${indent(depth, 2)}+ ${nodeKey}: ${stringify(value2, depth + 1)}`;
   });
   return ['{',
     ...result,

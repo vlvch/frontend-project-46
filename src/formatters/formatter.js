@@ -13,7 +13,7 @@ const formatter = (file1, file2, formatName) => {
     case 'json':
       return JSON.stringify(tree);
     default:
-      return stylish(tree);
+      return 'Unknown format';
   }
 };
 export default formatter;
