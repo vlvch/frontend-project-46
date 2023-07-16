@@ -1,9 +1,9 @@
 import plain from './plain.js';
 import stylish from './stylish.js';
-import diffTree from '../difftree.js';
+import makeDiffTree from '../makedifftree.js';
 
-const formatter = (file1, file2, formatName) => {
-  const tree = diffTree(file1, file2);
+const format = (file1, file2, formatName) => {
+  const tree = makeDiffTree(file1, file2);
 
   switch (formatName) {
     case 'plain':
@@ -13,7 +13,7 @@ const formatter = (file1, file2, formatName) => {
     case 'json':
       return JSON.stringify(tree);
     default:
-      return 'Unknown format';
+      throw new Error('Unknown format');
   }
 };
-export default formatter;
+export default format;

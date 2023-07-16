@@ -7,7 +7,7 @@ const dataParse = (data, type) => {
     case 'yml': case 'yaml':
       return YAML.parse(data);
     default:
-      return 'Can`t parse this extension';
+      throw new Error('Can`t parse this extension');
   }
 };
 export default dataParse;

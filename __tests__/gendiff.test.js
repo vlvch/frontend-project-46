@@ -11,44 +11,18 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.resolve(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), { encoding: 'utf8' });
 
-test('extension json', () => {
-  const result = readFile('result1.txt');
+const table = [
+  { file1: 'file1.json', file2: 'file2.json', resultFile: 'result1.txt' },
+  { file1: 'file1.yml', file2: 'file2.yml', resultFile: 'result1.txt' },
+  { file1: 'file1.yaml', file2: 'file2.yaml', resultFile: 'result1.txt' },
+  { file1: 'file1.yaml', file2: 'file2.json', resultFile: 'result1.txt' },
+  { file1: 'file1.json', file2: 'file2.json', resultFile: 'result2.txt', format: 'plain'},
+  { file1: 'file1.json', file2: 'file2.json', resultFile: 'result1.txt', format: 'stylish' },
+  { file1: 'file1.json', file2: 'file2.json', resultFile: 'result3.txt', format: 'json'},
+];
 
-  return expect(genDiff('file1.json', 'file2.json')).toEqual(result);
-});
+test.each(table)( 'test' , ({file1, file2, resultFile, format}) => {
+  const result = readFile(resultFile);
 
-test('extension yml', () => {
-  const result = readFile('result1.txt');
-
-  return expect(genDiff('file1.yml', 'file2.yml')).toEqual(result);
-});
-
-test('extension yaml', () => {
-  const result = readFile('result1.txt');
-
-  return expect(genDiff('file1.yaml', 'file2.yaml')).toEqual(result);
-});
-
-test('extensions yaml and json', () => {
-  const result = readFile('result1.txt');
-
-  return expect(genDiff('file1.json', 'file2.yaml')).toEqual(result);
-});
-
-test('plain', () => {
-  const result = readFile('result2.txt');
-
-  return expect(genDiff('file1.json', 'file2.json', 'plain')).toEqual(result);
-});
-
-test('stylish', () => {
-  const result = readFile('result1.txt');
-
-  return expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(result);
-});
-
-test('json', () => {
-  const result = readFile('result3.txt');
-
-  return expect(genDiff('file1.json', 'file2.json', 'json')).toEqual(result);
+  return expect(genDiff(file1, file2, format)).toEqual(result);
 });

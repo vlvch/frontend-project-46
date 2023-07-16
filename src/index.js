@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import formatter from './formatters/formatter.js';
+import format from './formatters/format.js';
 import dataParse from './parser.js';
 
 const getType = (filepath) => {
@@ -26,9 +26,9 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = getData(filepath1);
   const data2 = getData(filepath2);
 
-  const file1 = dataParse(data1, type1);
-  const file2 = dataParse(data2, type2);
+  const parsedData1 = dataParse(data1, type1);
+  const parsedData2 = dataParse(data2, type2);
 
-  return formatter(file1, file2, formatName);
+  return format(parsedData1, parsedData2, formatName);
 };
 export default genDiff;

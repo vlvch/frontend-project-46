@@ -1,13 +1,17 @@
 import _ from 'lodash';
 
-const findComplex = (value) => {
+const stringify = (value) => {
   if (_.isPlainObject(value)) {
     return '[complex value]';
   }
   return typeof value === 'string' ? `'${value}'` : value;
 };
 
-const getStart = (nodeName) => (nodeName.length > 1 ? `${nodeName}.` : nodeName);
+const makePath = (nodeName, nodeKey) => {
+  const result = [nodeName, nodeKey];
+
+  return result.filter(Boolean).join('.');
+}
 
 const plain = (node, nodeName = '') => {
   const result = node.map((key) => {
@@ -15,7 +19,7 @@ const plain = (node, nodeName = '') => {
       nodeKey, value, value2, type,
     } = key;
 
-    const path = `${getStart(nodeName)}${nodeKey}`;
+    const path = makePath(nodeName, nodeKey);
 
     if (type === 'objects') {
       return plain(value, path);
@@ -24,12 +28,15 @@ const plain = (node, nodeName = '') => {
       return `Property '${path}' was removed`;
     }
     if (type === 'added') {
-      return `Property '${path}' was added with value: ${findComplex(value)}`;
+      return `Property '${path}' was added with value: ${stringify(value)}`;
     }
-    if (type !== 'equal') {
-      return `Property '${path}' was updated. From ${findComplex(value)} to ${findComplex(value2)}`;
+    if (type === 'tree') {
+      return `Property '${path}' was updated. From ${stringify(value)} to ${stringify(value2)}`;
     }
-    return '';
+    if (type === 'nested') {
+      return '';
+    }
+    throw new Error('Node type is undefined');
   });
   return [...result.filter(Boolean)].join('\n');
 };
