@@ -11,7 +11,7 @@ const makePath = (nodeName, nodeKey) => {
   const result = [nodeName, nodeKey];
 
   return result.filter(Boolean).join('.');
-}
+};
 
 const plain = (node, nodeName = '') => {
   const result = node.map((key) => {
